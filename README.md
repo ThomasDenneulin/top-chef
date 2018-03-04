@@ -45,6 +45,8 @@ To launch the app you must use 2 command :
 
   A browser is display, you must wait untill the loader at the top of the page is finish then you should see several promotion for several restaurant.
 
+  ![demo](./img/demo.png)
+
 ## Introduction
 
 Each year, Michelin publish the Michelin Red Guide which awards Michelin stars to some restaurants.
