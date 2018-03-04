@@ -33,15 +33,14 @@
 To launch the app you must use 2 command :
   The first one used to launch the server (Where the list of promotion is fetch) :
     Go in root folder and then launch the server file with the 
-    ```sh
+    ```
     node server
     ```
 
   Then, you must launch the client side :
     Go in topchef folder and then launch the react app with the
-    ```sh
-    cd topchef
-    npm start
+    ```
+    cd topchef && npm start
     ```
 
   A browser is display, you must wait untill the loader at the top of the page is finish then you should see several promotion for several restaurant.
