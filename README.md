@@ -6,6 +6,8 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+
+- [HOW IT WORKS ?] (#how-it-works)
 - [Introduction](#introduction)
 - [Objective - Workshop in 1 sentence](#objective---workshop-in-1-sentence)
 - [How to do that?](#how-to-do-that)
@@ -25,6 +27,17 @@
 - [Licence](#licence)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## How it works ?
+
+To launch the app you must use 2 command :
+  The first one used to launch the server (Where the list of promotion is fetch) :
+    Go in root folder and then launch the server file with the "node server" command.
+
+  Then, you must launch the client side :
+    Go in topchef folder and then launch the react app with the "npm start" command.
+
+  A browser is display, you must wait untill the loader at the top of the page is finish then you should see several promotion for several restaurant.
 
 ## Introduction
 

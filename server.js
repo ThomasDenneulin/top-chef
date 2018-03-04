@@ -26,12 +26,22 @@ router.get('/', function (req, res) {
 // more routes for our API will happen here
 
 router.route('/restaurants')
-.get((req,res)=>{
-    fs.readFile('./topchef/src/Restaurants.json',"utf8",(err,data)=>{
-        data = JSON.parse(data);
-        res.json(data);
+    .get((req, res) => {
+        scrap.LOAD_PROMO()
+            .then(file => {
+                fs.readFile(file, "utf8", (err, data) => {
+                    data = JSON.parse(data);
+                    data = data.sort((a, b) => {
+                        return b.stars - a.stars
+                    });
+                    res.json(data);
+                })
+            })
+            .catch(err => {
+                console.log(err + "RETRY : ");
+                scrap.LOAD_PROMO(); //If it fails, we retry
+            });
     })
-})
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);

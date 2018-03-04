@@ -9,13 +9,13 @@ function IsJsonString(str) {
     return true;
 }
 
-function getId(name) {
+function getId(name,locality) {
     return new Promise((resolve, reject) => {
             name = name.replace(/é|è|ê/g, "e");
             request('https://m.lafourchette.com/api/restaurant-prediction?name=' + name, (err, resp, html) => {
                 if (err) {
                     console.log("error");
-                    return reject(err);
+                    return resolve("Err");
                 }
                 else {
                     if (resp.statusCode == 400) {
@@ -23,14 +23,17 @@ function getId(name) {
                     }
                     else {
                         var json = JSON.parse(html);
-                        if (json[0] != null) {
-                            var id = json[0].id;
-                            console.log('Restaurant ' + name + ' id : ' + id);
-                            return resolve(id);
-                        }
-                        else {
-                            return resolve("NOT FOUND");
-                        }
+                        var id = -1;
+                        if(json[0]){
+                        json.forEach(element => {
+                            if(element.address.postal_code == locality){
+                                console.log(element.name + " "+ element.address.postal_code+" : "+element.id);
+                                id = element.id;
+                            }
+                        })
+                    }
+                       if (id != -1) {return resolve(id)}
+                       else return resolve("NOT FOUND");
                     }
                 }
             });
@@ -43,17 +46,16 @@ function getPromo(id) {
             var promo = [];
             request("https://m.lafourchette.com/api/restaurant/" + id + "/sale-type", (err, resp, html) => {
                 if (err) {
-                    return reject(err);
+                    return resolve("err");
                 }
-                console.log(id)
                 try {
                     var json = JSON.parse(html);
                     json.forEach(element => {
                         if (element.is_special_offer) {
-                            console.log("special offer");
                             promo.push(element);
                         }
                     });
+                    console.log("HAVE PROMO")
                     return resolve(promo);
                 } catch (error) {
                     return resolve("PROMO NOT FOUND");
